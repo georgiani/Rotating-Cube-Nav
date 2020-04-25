@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rotatingcubeicon/NavItem/NavItem.dart';
+import 'NavBarItem.dart';
 
 class RotatingCubeNav extends StatelessWidget {
   /// The items of the navigation bar. See [NavBarItem] definition

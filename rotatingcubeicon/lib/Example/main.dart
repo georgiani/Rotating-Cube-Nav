@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rotatingcubeicon/RotatingCubeNav/RotatingCubeNav.dart';
-import 'package:rotatingcubeicon/NavItem/NavItem.dart';
+import 'package:rotatingcubeicon/RotatingCubeNav/RotatingCubeNavBar.dart';
 import 'globals.dart';
 
 void main() {
