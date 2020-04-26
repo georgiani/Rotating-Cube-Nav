@@ -41,21 +41,22 @@ class RotatingCubeNav extends StatelessWidget {
   PageController _controller;
 
   void _rotateCubeAtPosition(int index) {
-    items[index].rotateForward();
-    for (int i = 0; i < items.length; i++) {
-      if (i != index) {
-        items[i].rotateBack();
+    if (index != navBarIndex) {
+      items[index].rotateForward();
+      items[navBarIndex].rotateBack();
+      navBarIndex = index;
+
+      if (pages != null) {
+        _controller.animateToPage(
+          index,
+          duration: pageTransitionDuration ?? Duration(milliseconds: 500),
+          curve: pageTransitionCurve ?? Curves.easeIn,
+        );
       }
     }
-
-    if (pages != null) {
-      _controller.animateToPage(
-        index,
-        duration: pageTransitionDuration ?? Duration(milliseconds: 500),
-        curve: pageTransitionCurve ?? Curves.easeIn,
-      );
-    }
   }
+
+  int navBarIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -76,11 +77,16 @@ class RotatingCubeNav extends StatelessWidget {
         ? Stack(
             children: [
               PageView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: this.numberOfItems,
                 controller: _controller,
                 itemBuilder: (pageCtx, idx) {
                   return pages[idx];
                 },
+                // onPageChanged: (value) {
+                //   this._rotateCubeAtPosition(value);
+                // },
+                // TODO: implement onPageChanged when the user scrolls
               ),
               Padding(
                 padding:
